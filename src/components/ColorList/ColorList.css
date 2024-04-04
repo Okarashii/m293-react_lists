@@ -1,6 +1,21 @@
 .cl-wrapper {
-    /* color: white; */
     display: flex;
     flex-direction: column;
     align-items: start;
+}
+
+.cl-new-span {
+    display: gap;
+    grid-template-columns: auto auto;
+}
+
+.cl-new-input {
+    background-color: transparent;
+    border-radius: 0.5rem;
+    color: white;
+    width: 5rem;
+}
+
+.cl-new-button {
+    
 }

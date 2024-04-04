@@ -13,14 +13,14 @@ export default function ColorList() {
     
     const addColor = () => {
         if (newColor === '') return;
-        if (colors.filter(c => c.title === newColor).length == 0) {
+        if (colors.filter(c => c.title === newColor).length === 0) {
             const red = Math.floor(Math.random() * 255);
             const green = Math.floor(Math.random() * 255);
             const blue = Math.floor(Math.random() * 255);
             const html = ('#' + red.toString(16) + green.toString(16) + blue.toString(16)).toUpperCase();
             setColors([{title:newColor, red, green, blue, html} , ...colors]);
         }
-        
+
         setNewColor('');
     }
 
@@ -30,8 +30,8 @@ export default function ColorList() {
                 {colors.map((c) => <li style={{color:c.html}} key={c.title}>{c.title + "(" + c.red + "," + c.green + "," + c.blue + ")"}</li>)}
             </ul>
             <span clasName="cl-new-span">
-                <input type="text" value={newColor} onChange={(e) => setNewColor(e.target.value)}/>
-                <button onClick={addColor}>Hinzufügen</button>
+                <input className='cl-new-input' type="text" value={newColor} onChange={(e) => setNewColor(e.target.value)}/>
+                <button className='cl-new-button' onClick={addColor}>Hinzufügen</button>
             </span>
 
         </>

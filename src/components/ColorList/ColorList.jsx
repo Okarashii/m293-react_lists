@@ -56,14 +56,14 @@ export default function ColorList() {
                 [red, green, blue] = hex.slice(1).match(/.{1,2}/g).map(c => Number.parseInt(c, 16));
             }
             else {
-                red = Math.floor(Math.random() * 255);
-                green = Math.floor(Math.random() * 255);
-                blue = Math.floor(Math.random() * 255);
-                hex = ('#' + red.toString(16) + green.toString(16) + blue.toString(16)).toUpperCase();
+                const existingColors = colors.map(c => c.hex);
+                do {
+                    [red, green, blue] = [0, 0, 0].map(c => Math.floor(Math.random() * 255));
+                    hex = [red,green,blue].reduce((a, c) => a + c.toString(16).padStart(2, "0"), '#');
+                } while (existingColors.includes(hex))
             }
             
             setColors([{title, red, green, blue, hex} , ...colors]);
-
             setSketchColorName('');
             setRandomColorName('');
         }

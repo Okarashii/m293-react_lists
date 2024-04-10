@@ -63,7 +63,7 @@ export default function ColorList() {
                 } while (existingColors.includes(hex))
             }
             
-            setColors([{title, red, green, blue, hex} , ...colors]);
+            setColors([{title, red, green, blue, hex: hex.toUpperCase()} , ...colors]);
             setSketchColorName('');
             setRandomColorName('');
         }

@@ -85,3 +85,4 @@
 .cl-new-input[aria-invalid="color"] + label::after {
     content: 'Farbe ist schon definiert!';
 }
+

@@ -45,6 +45,7 @@
 }
 
 .cl-new-random-h3 {
+    text-transform: capitalize;
     color: white;
 }
 

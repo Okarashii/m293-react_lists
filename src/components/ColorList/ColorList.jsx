@@ -76,7 +76,7 @@ export default function ColorList() {
             </ul>
             <span className="cl-new-span">
                 <div className="cl-new-random">
-                    <h3 className="cl-new-random-h3">Zufällige Farbe</h3>
+                    <h3 className="cl-new-random-h3">zufällig</h3>
                     <div className="cl-new-input-wrapper">
                         <input ref={randomNameInput} id="randomName" className='cl-new-input' type="text" value={randomColorName} onChange={(e) => setRandomColorName(e.target.value)}/>
                         <label htmlFor='randomName'>Farbtitel</label>
@@ -84,6 +84,7 @@ export default function ColorList() {
                     <button className='cl-new-button' onClick={() => addColor(randomColorName, "random")}>Hinzufügen</button>
                 </div>
                 <div className="cl-new-picker">
+                <h3 className="cl-new-random-h3">gewählt</h3>
                     <SketchPicker className="cl-picker" color={sketchColor} onChangeComplete={(color) => setSketchColor(color.hex)}/>
                     <div className="cl-new-input-wrapper">
                         <input ref={pickerNameInput} id="pickerName" className='cl-new-input' type="text" value={sketchColorName} onChange={(e) => setSketchColorName(e.target.value)}/>

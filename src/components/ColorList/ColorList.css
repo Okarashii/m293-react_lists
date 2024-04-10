@@ -5,17 +5,49 @@
 }
 
 .cl-new-span {
-    display: gap;
+    display: flex;
+    gap: 2rem;
+}
+
+.cl-new-picker, .cl-new-random {
+    display: grid;
+    height: min-content;
+    column-gap: 1.5rem;
     grid-template-columns: auto auto;
+    grid-template-rows: auto auto;
+}
+
+.cl-new-picker {
+    row-gap: 1rem;
+    width: min-content;
+}
+
+.cl-new-random {
+    width: fit-content;
+
 }
 
 .cl-new-input {
     background-color: transparent;
     border-radius: 0.5rem;
     color: white;
-    width: 5rem;
+    width: 6rem;
 }
 
 .cl-new-button {
-    
+    padding: 2px 1.5ch;
+    width: 100%;
+}
+
+.cl-picker, .cl-new-random-h3 {
+    grid-column: span 2;
+}
+
+.cl-new-random-h3 {
+    color: white;
+}
+
+.cl-new-input[aria-invalid="true"] {
+    /* color: red; */
+    outline: red 2px solid;
 }

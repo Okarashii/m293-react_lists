@@ -7,8 +7,8 @@ export default function ColorList() {
     const pickerNameInput = useRef(null);
 
     const onInputFocus = (e) => {
-        randomNameInput.current.ariaInvalid = false;
-        pickerNameInput.current.ariaInvalid = false;
+        randomNameInput.current.ariaInvalid = "";
+        pickerNameInput.current.ariaInvalid = "";
         e.target.select();
     }
 
@@ -33,12 +33,19 @@ export default function ColorList() {
     const [sketchColor, setSketchColor] = useState('#000000');
     const [sketchColorName, setSketchColorName] = useState('');
     
-    const addColor = (title, hex = "") => {
-        randomNameInput.current.ariaInvalid = false;
-        pickerNameInput.current.ariaInvalid = false;
-        const isUnusedTitle = colors.filter(c => c.title === title).length === 0;
+    const addColor = (title, target, hex = "") => {
+        randomNameInput.current.ariaInvalid = "";
+        pickerNameInput.current.ariaInvalid = "";
+        let error = "";
 
-        if (title !== '' && isUnusedTitle) {
+        if (title === '') error = "noname";
+        else if (colors.filter(c => c.title === title).length > 0) error = "usedname";
+        else if (colors.filter(c => c.hex === hex).length > 0) error = "color";
+
+        if (target === "random") randomNameInput.current.ariaInvalid = error;
+        else pickerNameInput.current.ariaInvalid = error;
+
+        if (error === "") {
             let [red, green, blue] = [];
             if (hex !== "") {
                 [red, green, blue] = hex.slice(1).match(/.{1,2}/g).map(c => Number.parseInt(c, 16));
@@ -54,17 +61,6 @@ export default function ColorList() {
 
             setSketchColorName('');
             setRandomColorName('');
-
-        }
-        else {
-            console.log("sketchColor.hex: ", sketchColor);
-            console.log("hex: ",hex);
-            if (hex === "") {
-                randomNameInput.current.ariaInvalid = true;
-            }
-            else {
-                pickerNameInput.current.ariaInvalid = true;
-            }
         }
     }
 
@@ -76,13 +72,19 @@ export default function ColorList() {
             <span className="cl-new-span">
                 <div className="cl-new-random">
                     <h3 className="cl-new-random-h3">Zufällige Farbe</h3>
-                    <input ref={randomNameInput} id="randomName" className='cl-new-input' type="text" value={randomColorName} onChange={(e) => setRandomColorName(e.target.value)}/>
-                    <button className='cl-new-button' onClick={() => addColor(randomColorName)}>Hinzufügen</button>
+                    <div className="cl-new-input-wrapper">
+                        <input ref={randomNameInput} id="randomName" className='cl-new-input' type="text" value={randomColorName} onChange={(e) => setRandomColorName(e.target.value)}/>
+                        <label htmlFor='randomName'>Farbtitel</label>
+                    </div>
+                    <button className='cl-new-button' onClick={() => addColor(randomColorName, "random")}>Hinzufügen</button>
                 </div>
                 <div className="cl-new-picker">
                     <SketchPicker className="cl-picker" color={sketchColor} onChangeComplete={(color) => setSketchColor(color.hex)}/>
-                    <input ref={pickerNameInput} id="pickerName" className='cl-new-input' type="text" value={sketchColorName} onChange={(e) => setSketchColorName(e.target.value)}/>
-                    <button className='cl-new-button' onClick={() => addColor(sketchColorName, sketchColor)}>Hinzufügen</button>
+                    <div className="cl-new-input-wrapper">
+                        <input ref={pickerNameInput} id="pickerName" className='cl-new-input' type="text" value={sketchColorName} onChange={(e) => setSketchColorName(e.target.value)}/>
+                        <label htmlFor='pickerName'>Farbtitel</label>
+                    </div>
+                    <button className='cl-new-button' onClick={() => addColor(sketchColorName, "picker", sketchColor)}>Hinzufügen</button>
                 </div>
             </span>
         </>

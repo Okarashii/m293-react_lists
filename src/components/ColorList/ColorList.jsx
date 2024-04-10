@@ -13,12 +13,17 @@ export default function ColorList() {
     }
 
     useEffect(() => {
-        document.getElementById("pickerName").addEventListener("focus", onInputFocus);
-        document.getElementById("randomName").addEventListener("focus", onInputFocus);
+        const randomInput = randomNameInput.current;
+        const pickerInput = pickerNameInput.current;
+        randomInput.ariaInvalid = "";
+        pickerInput.ariaInvalid = "";
+
+        randomInput.addEventListener("focus", onInputFocus);
+        pickerInput.addEventListener("focus", onInputFocus);
 
         return (() => {
-            document.getElementById("pickerName").removeEventListener("focus", onInputFocus);
-            document.getElementById("randomName").removeEventListener("focus", onInputFocus);
+            randomInput.removeEventListener("focus", onInputFocus);
+            pickerInput.removeEventListener("focus", onInputFocus);
         });
     }, [])
 
